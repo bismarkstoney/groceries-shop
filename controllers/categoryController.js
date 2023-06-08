@@ -7,7 +7,7 @@ export const getAllCategroies=async(req,res)=>{
 
     try {
         const categories= await Category.find()
-        res.status(200).json({'success':true, data: categories})
+        res.status(200).json({'success':true, results:categories.length, data: categories})
     } catch (error) {
         res.status(400).json({message: error.message})
     }
@@ -22,7 +22,7 @@ export const getCategory=async(req,res)=>{
     try {
         const category= await Category.findById(req.params.id)
         if(!category) return res.status(400).json({message: `The category with ${req.params.id}not found`})
-        res.status(200).json({'success':true, data: product})
+        res.status(200).json({'success':true, data: category})
     } catch (error) {
         res.status(400).json({message: error.message})
     }
@@ -39,7 +39,7 @@ export const addCategory= async(req,res)=>{
         const newCategory= new Category({
             name: req.body.name ,
            image:req.file ? req.file.location : '',
-            itemCount:rew.body.itemCount
+            itemCount:req.body.itemCount
       
           })
       
@@ -77,12 +77,12 @@ export const deleteCategory=async(req,res)=>{
 export const updateCategory=async(req,res)=>{
 
     try {
-        const category= await Category.findById(req.params.id, req.body, {
+        const category= await Category.findByIdAndUpdate(req.params.id, req.body, {
             new:true,
             runValidators:true
         })
         if(!category) return res.status(400).json({message: `The category with ${req.params.id}not found`})
-        res.status(200).json({'success':true, data: product})
+        res.status(200).json({'success':true, data: category})
     } catch (error) {
         res.status(400).json({message: error.message})
     }

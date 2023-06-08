@@ -42,7 +42,7 @@ export const addProduct= async(req,res)=>{
             discount: req.body.discount,
             price: req.body.price,
             coverImage:req.file ? req.file.location : '',
-            category:req.category.id
+            category:req.body.category
             
       
           })

@@ -27,9 +27,9 @@ const productSchema = new mongoose.Schema({
     type:String,
     required:[true, 'Cover image is required']
   },
-  images:{
-    type: [Array]
-  },
+  // images:{
+  //   type: [String]
+  // },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',
