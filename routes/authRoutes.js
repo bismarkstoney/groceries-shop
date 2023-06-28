@@ -1,20 +1,12 @@
-import express from "express";
-import  {
-    login,
-    register,
-    getAllUsers,
-    setAvatar,
-    logOut,
-  } from  "../controllers/userController.js"
-  
+import passport from 'passport';
+import express from 'express';
+const router = express.Router();
+router.get(
+	'/',
+	passport.authenticate('google', {
+		scope: ['profile', 'email'],
+	})
+);
+router.get('/callback', passport.authenticate('google'));
 
-
-  const router = express.Router()
-  
-  router.post("/login", login);
-  router.post("/register", register);
-  router.get("/allusers/:id", getAllUsers);
-  router.post("/setavatar/:id", setAvatar);
-  router.get("/logout/:id", logOut);
-  
-  export default  router;
+export default router;
