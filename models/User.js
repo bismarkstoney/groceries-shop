@@ -1,22 +1,17 @@
-import  mongoose  from 'mongoose';
+import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema(
 	{
-		username: {
+		userId: {
 			type: String,
-			required: true,
-			min: 3,
-			max: 20,
-			unique: true,
 		},
 		email: {
 			type: String,
-			required: true,
-			unique: true,
+
 			max: 50,
 		},
 		password: {
 			type: String,
-			required: true,
+
 			min: 8,
 		},
 		isAvatarImageSet: {
@@ -25,11 +20,17 @@ const userSchema = new mongoose.Schema(
 		},
 		avatarImage: {
 			type: String,
-			default: '',
+			default: 'photo.png',
+		},
+		firstName: {
+			type: String,
+		},
+		lastName: {
+			type: String,
 		},
 	},
 	{ timeStamps: true }
 );
 
- const Users = mongoose.model('Users', userSchema);
- export default Users
+const Users = mongoose.model('Users', userSchema);
+export default Users;
